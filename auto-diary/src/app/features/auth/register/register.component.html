@@ -1,1 +1,27 @@
-<p>register works!</p>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <input type="text" formControlName="username" placeholder="Username" />
+  @if (registerForm.get('username')?.errors?.['required'] && registerForm.get('username')?.touched) {
+    <span>Username is required</span>
+  }
+
+  <input type="email" formControlName="email" placeholder="Email" />
+  @if (registerForm.get('email')?.errors?.['required'] && registerForm.get('email')?.touched) {
+    <span>Email is required</span>
+  }
+  @if (registerForm.get('email')?.errors?.['email'] && registerForm.get('email')?.touched) {
+    <span>Enter valid email!</span>
+  }
+  <input type="password" formControlName="password" placeholder="Password" />
+  @if (registerForm.get('password')?.errors?.['required'] && registerForm.get('password')?.touched) {
+    <span>Password is required</span>
+  }
+  @if (registerForm.get('password')?.errors?.['minlength'] && registerForm.get('password')?.touched) {
+    <span>Password must be at least 4 characters</span>
+  }
+  <input type="tel" formControlName="tel" placeholder="+359 xxx xxx xxx" />
+  @if (registerForm.get('tel')?.errors?.['required'] && registerForm.get('tel')?.touched) {
+    <span>Telephone is required</span>
+  }
+
+  <button type="submit" [disabled]="registerForm.invalid">Регистрация</button>
+</form>
