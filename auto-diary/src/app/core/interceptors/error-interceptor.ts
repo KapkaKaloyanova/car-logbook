@@ -41,7 +41,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
       } else if (err.status >= 500) {
         message = 'Internal server error! Try again later';
       } else if (err.error?.message) {// за всички останали случаи, когато сървъра праща грешка
-        message = err.error.message || `Error: ${err.status}`;
+        message = err.error.message ;
       }
 
       notifService.error(message);
