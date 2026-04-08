@@ -24,6 +24,33 @@
   color: var(--text-main);
 }
 
+.dropdown-menu {
+  position: absolute;
+  top: 100%; /* Точно под текста */
+  left: 0;
+  z-index: 999; /* Над всичко останало */
+  background: #1a1d24; /* Или твоя променлива */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 8px 0;
+  min-width: 200px;
+  margin-top: 10px;
+  border: 1px solid var(--border-card);
+}
+
+.dropdown-item {
+  display: block;
+  padding: 10px 16px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.dropdown-item:hover {
+  background: var(--primary-low-op);
+  color: var(--primary);
+}
+
 /* Скриваме бутона Logout, ако е мобилна версия или искаме по-малък размер */
 .nav-btn {
   border: 1px solid var(--primary-border);
@@ -33,5 +60,28 @@
   border-radius: 6px;
   cursor: pointer;
 }
+.dropdown-divider {
+  height: 1px;
+  background: var(--border-card);
+  margin: 8px 0;
+}
 
+.add-car {
+  color: var(--primary); /* Синьото от твоя дизайн */
+  font-weight: 500;
+}
 
+.add-car span {
+  margin-right: 5px;
+  font-size: 16px;
+}
+
+/* Ефект при отворено меню за стрелката */
+.dropdown-toggle .arrow {
+  display: inline-block;
+  transition: transform 0.2s;
+}
+
+.dropdown.open .arrow {
+  transform: rotate(180deg);
+}

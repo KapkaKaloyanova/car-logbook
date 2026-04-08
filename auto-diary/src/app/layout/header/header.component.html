@@ -1,15 +1,27 @@
 <header>
   <nav>
-    <div class="logo" routerLink="/home">Auto<span>Diary</span></div>
+    <div class="logo" routerLink="/home" style="cursor: pointer;">Auto<span>Diary</span></div>
 
     <div class="nav-links">
-      @if (!isLoggedIn()) {
-        <a class="nav-link nav-btn" routerLink="/cars" routerLinkActive="active">автомобили</a>
-        <a class="nav-link nav-btn" routerLink="/login" routerLinkActive="active">влез</a>
-      } @else {
-        <div class="dropdown">
-          <span class="nav-link nav-btn">моите коли ▼</span>
+      @if (isLoggedIn()) {
+        <div class="dropdown" (mouseleave)="closeDropdown()">
+          <span class="nav-link nav-btn" (click)="toggleDropdown()" style="cursor: pointer;">моите коли ▼</span>
+          @if (isDropdownOpen()) {
+            <div class="dropdown-menu">
+              @for (car of userCars(); track car.id) {
+                <a [routerLink]="['/cars', car.id]" class="dropdown-item" (click)="closeDropdown()"
+                  >{{ car.brand }} {{ car.model }}
+                </a>
+              }
+              <div class="dropdown-divider"></div>
+
+              <a routerLink="/cars/create" class="dropdown-item add-car" (click)="closeDropdown()">
+                <span>+</span> Добави кола
+              </a>
+            </div>
+          }
         </div>
+
         <a class="nav-link nav-btn" routerLink="/user" routerLinkActive="active"
           >{{ username() }}'s профил</a
         >
@@ -17,6 +29,9 @@
           <span class="notification-bell">🔔</span>
         </div>
         <button class="nav-btn" (click)="logout()">изход</button>
+      } @else {
+        <a class="nav-link nav-btn" routerLink="/cars" routerLinkActive="active">автомобили</a>
+        <a class="nav-link nav-btn" routerLink="/login" routerLinkActive="active">влез</a>
       }
     </div>
   </nav>
