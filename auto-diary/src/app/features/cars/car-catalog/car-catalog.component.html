@@ -1,1 +1,20 @@
-<p>car-catalog works!</p>
+<div class="catalog-container">
+  <div class="catalog-header">
+    <h1>Всички автомобили</h1>
+    <p>Разгледайте всички автомобили в базата данни.</p>
+  </div>
+  @if (isLoading()) {
+    <div class="loader">Зареждане...</div>
+  } @else {
+    <div class="cars-grid">
+      @for (carItem of carsList(); track carItem._id) {
+        <app-car-card [car]="carItem" />
+      } @empty {
+        <div class="no-cars">
+          <p>Все още няма добавени автомобили.</p>
+          <a routerLink="/cars/create" class="btn-primary">Добави автомобил</a>
+        </div>
+      }
+    </div>
+  }
+</div>

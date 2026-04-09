@@ -1,1 +1,15 @@
-<p>car-card works!</p>
+<div class="car-card">
+  <div class="car-image">
+    <img [src]="car().imageUrl || '/images/car-placeholder.png'" alt="Car image" />
+  </div>
+  <div class="car-info">
+    <h3>{{ car().brand }} {{ car().model }}</h3>
+    <p>Година: {{ car().year }}</p>
+    <p>Двигател: {{ car().engineType }}</p>
+    <p>Пробег: {{ car().initialMileage }} км</p>
+    <p>Тип на гориво: {{ car().fuelType }}</p>
+    <div class="car-actions">
+      <a [routerLink]="['/cars', car()._id]" class="btn-primary">Детайли</a>
+    </div>
+  </div>
+</div>
