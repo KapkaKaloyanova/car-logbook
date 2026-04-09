@@ -29,7 +29,7 @@
   top: 100%; /* Точно под текста */
   left: 0;
   z-index: 999; /* Над всичко останало */
-  background: #1a1d24; /* Или твоя променлива */
+  background: #1a1d24; 
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   padding: 8px 0;
@@ -67,7 +67,7 @@
 }
 
 .add-car {
-  color: var(--primary); /* Синьото от твоя дизайн */
+  color: var(--primary); /* Синьото */
   font-weight: 500;
 }
 

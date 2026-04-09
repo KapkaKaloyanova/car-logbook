@@ -1,0 +1,122 @@
+/* Контейнер, който заема цялото налично пространство под хедъра */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 150px); /* Изваждаме височината на хедъра */
+  padding: 20px;
+}
+
+/* Стилизация на самата карта */
+.auth-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 12px;
+  padding: 40px;
+  width: 100%;
+  max-width: 500px; /* Фиксирана ширина на картата */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.auth-card h2 {
+  margin-bottom: 30px;
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--text-main);
+}
+
+/* Стилизация на входните полета */
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+input {
+  width: 100%;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-card);
+  border-radius: 8px;
+  color: var(--text-main);
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+input:focus {
+  border-color: var(--primary);
+}
+
+input::placeholder {
+  color: var(--text-dark);
+}
+
+/* Грешки */
+.error-text {
+  display: block;
+  color: #ef4444;
+  font-size: 12px;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+/* Бутонът за вход */
+/* Контейнер за бутона - добавя разстояние над него */
+.form-actions {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+}
+/* Стилизиране на самия бутон */
+.auth-btn {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  margin-top: 25px;
+  padding: 12px 30px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%; /* Правим го широк колкото инпутите за по-модерен вид */
+  transition:
+    background-color 0.2s,
+    transform 0.1s;
+}
+
+/* Ефект при посочване */
+.auth-btn:hover:not(:disabled) {
+  background-color: var(--primary-hover); /* Малко по-светло синьо */
+  transform: translateY(-1px);
+}
+
+/* Стил за неактивен бутон (когато формата е невалидна) */
+.auth-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: var(--text-dark); /* Сивкав цвят */
+  filter: grayscale(1);
+}
+
+/* Долен текст за регистрация */
+.auth-footer {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-light);
+}
+
+.auth-footer p {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.auth-footer a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
+}
