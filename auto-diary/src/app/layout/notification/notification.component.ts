@@ -18,7 +18,13 @@ export class NotificationComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscription = this.notificationService.notifications$
-      .subscribe(message => this.currentMessage.set(message))
+      .subscribe(message => {
+        this.currentMessage.set(message);
+        setTimeout(() => {
+          this.currentMessage.set(null)
+
+        }, message.duration)
+      })
   }
 
   ngOnDestroy(): void {

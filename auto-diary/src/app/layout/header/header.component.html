@@ -8,8 +8,8 @@
           <span class="nav-link nav-btn" (click)="toggleDropdown()" style="cursor: pointer;">моите коли ▼</span>
           @if (isDropdownOpen()) {
             <div class="dropdown-menu">
-              @for (car of userCars(); track car.id) {
-                <a [routerLink]="['/cars', car.id]" class="dropdown-item" (click)="closeDropdown()"
+              @for (car of userCars(); track car._id) {
+                <a [routerLink]="['/cars', car._id]" class="dropdown-item" (click)="closeDropdown()"
                   >{{ car.brand }} {{ car.model }}
                 </a>
               }

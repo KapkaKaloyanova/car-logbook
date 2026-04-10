@@ -7,14 +7,14 @@
         <div class="form-group">
           <input type="text" formControlName="brand" placeholder="Марка" />
           @if (createForm.get('brand')?.errors?.['required'] && createForm.get('brand')?.touched) {
-            <span>Марката е задължителна</span>
+            <p class="error">Марката е задължителна</p>
           }
         </div>
 
         <div class="form-group">
           <input type="text" formControlName="model" placeholder="Модел" />
           @if (createForm.get('model')?.errors?.['required'] && createForm.get('model')?.touched) {
-            <span>Модлът е задължителен</span>
+            <p class="error">Модлът е задължителен</p>
           }
         </div>
       </div>
@@ -23,13 +23,13 @@
         <div class="form-group">
           <input type="number" formControlName="year" placeholder="Година на производство" />
           @if (createForm.get('year')?.errors?.['required'] && createForm.get('year')?.touched) {
-            <span>Годината е задължителна</span>
+            <p class="error">Годината е задължителна</p>
           }
           @if (createForm.get('year')?.errors?.['min'] && createForm.get('year')?.touched) {
-            <span>Годината не може да бъде по-малка от 1900</span>
+            <p class="error">Годината не може да бъде по-малка от 1900</p>
           }
           @if (createForm.get('year')?.errors?.['max'] && createForm.get('year')?.touched) {
-            <span>Годината не може да бъде по-голяма от текущата</span>
+            <p class="error">Годината не може да бъде по-голяма от текущата</p>
           }
         </div>
         <div class="form-group">
@@ -38,7 +38,7 @@
             createForm.get('engineType')?.errors?.['required'] &&
             createForm.get('engineType')?.touched
           ) {
-            <span>Двигателя е задължителен</span>
+            <p class="error">Двигателя е задължителен</p>
           }
         </div>
       </div>
@@ -49,13 +49,13 @@
             createForm.get('initialMileage')?.errors?.['required'] &&
             createForm.get('initialMileage')?.touched
           ) {
-            <span>Началният пробег е задължителен</span>
+            <p class="error">Началният пробег е задължителен</p>
           }
           @if (
             createForm.get('initialMileage')?.errors?.['min'] &&
             createForm.get('initialMileage')?.touched
           ) {
-            <span>Началният пробег не може да бъде по-малък от 0</span>
+            <p class="error">Началният пробег не може да бъде по-малък от 0</p>
           }
         </div>
         <div class="form-group">
@@ -70,7 +70,7 @@
           @if (
             createForm.get('fuelType')?.errors?.['required'] && createForm.get('fuelType')?.touched
           ) {
-            <span>Горивото е задължително</span>
+            <p class="error">Горивото е задължително</p>
           }
         </div>
       </div>
@@ -83,6 +83,7 @@
         <button type="submit" [disabled]="createForm.invalid" class="btn-primary auth-btn">
           Създай
         </button>
+        <a  class="reset-link" (click)="createForm.reset()">Изчисти формата</a>
       </div>
     </form>
   </div>

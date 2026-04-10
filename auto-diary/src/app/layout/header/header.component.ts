@@ -1,28 +1,25 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
-// import { CarService } from '../../core/services/car.service'; // Бъдещия carService
+import { CarService } from '../../core/services/car.service';
+import { Car } from '../../shared/interfaces/car';
 @Component({
   selector: 'app-header',
   imports: [RouterLink, RouterLinkActive],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
-export class HeaderComponent {
-   private router = inject(Router);
-   private authService = inject(AuthService);
-  // carService = inject(CarService); // Тук ще взимаме колите
+export class HeaderComponent implements OnInit {
+  private router = inject(Router);
+  private authService = inject(AuthService);
+  private carService = inject(CarService);
 
   isLoggedIn = this.authService.isLoggedIn;
   username = computed(() => this.authService.currentUser()?.username ?? '');
 
   isDropdownOpen = signal(false);
 
-  // Засега правим примерен списък, докато вържем бекенда
-  userCars = signal([
-    { id: '1', brand: 'BMW', model: '320d' },
-    { id: '2', brand: 'Opel', model: 'Astra' }
-  ]);
+  userCars = signal<Car[]>([]);
 
   toggleDropdown() {
     this.isDropdownOpen.update(val => !val);
@@ -38,5 +35,10 @@ export class HeaderComponent {
     })
   }
 
+  ngOnInit(): void {
+    if (this.authService.isLoggedIn()) {
+      this.carService.getCarsByOwner(this.authService.currentUser()!._id).subscribe(cars => this.userCars.set(cars));
+    }
+  }
 
 }

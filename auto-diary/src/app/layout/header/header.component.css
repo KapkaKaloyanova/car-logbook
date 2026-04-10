@@ -38,6 +38,15 @@
   border: 1px solid var(--border-card);
 }
 
+.dropdown-menu::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 0;
+    right: 0;
+    height: 10px;
+}
+
 .dropdown-item {
   display: block;
   padding: 10px 16px;

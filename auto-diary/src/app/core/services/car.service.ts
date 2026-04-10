@@ -30,5 +30,8 @@ export class CarService {
     return this.httpClient.delete<void>(`${this.apiUrl}/${carId}`);
   };
 
+  getCarsByOwner(ownerId: string): Observable<Car[]> {
+    return this.httpClient.get<Car[]>(`${ this.apiUrl }?where=_ownerId%3D%22${ownerId}%22`);
+  };
 
 }

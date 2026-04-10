@@ -5,12 +5,16 @@
   --bg-body: #101525;
   --bg-card: rgba(255, 255, 255, 0.03);
   --bg-card-hover: rgba(255, 255, 255, 0.05);
-  
+
   /* Ацентни цветове (Сините цветове) */
   --primary: #3b82f6;
   --primary-hover: #2563eb;
   --primary-low-op: rgba(59, 130, 246, 0.15);
   --primary-border: rgba(59, 130, 246, 0.4);
+
+  /* Други цветове */
+  --color-success: #22c55e;
+  --color-danger: #ef4444;
 
   /* Текст */
   --text-main: #f1f5f9;
@@ -24,10 +28,12 @@
 }
 
 /* 2. ГЛОБАЛЕН RESET */
-*, *::before, *::after { 
-  box-sizing: border-box; 
-  margin: 0; 
-  padding: 0; 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -44,7 +50,7 @@ main {
   min-height: calc(100vh - 70px); /* Изваждаме височината на навигацията */
   display: block; /* За по-стари браузъри */
 
-  padding-bottom: 40px; 
+  padding-bottom: 40px;
 }
 
 /* 4. НАВИГАЦИЯ (NAV) */
@@ -63,7 +69,9 @@ nav {
   letter-spacing: 0.5px;
 }
 
-.logo span { color: var(--primary); }
+.logo span {
+  color: var(--primary);
+}
 
 .nav-links {
   display: flex;
@@ -78,7 +86,9 @@ nav {
   transition: color 0.2s;
 }
 
-.nav-link:hover { color: var(--text-main); }
+.nav-link:hover {
+  color: var(--text-main);
+}
 
 .nav-btn {
   font-size: 13px;
@@ -91,7 +101,9 @@ nav {
   transition: background 0.2s;
 }
 
-.nav-btn:hover { background: rgba(59, 130, 246, 0.25); }
+.nav-btn:hover {
+  background: rgba(59, 130, 246, 0.25);
+}
 
 /* 5. HERO СЕКЦИЯ */
 .hero {
@@ -119,7 +131,9 @@ nav {
   margin-bottom: 20px;
 }
 
-.hero h1 span { color: var(--primary); }
+.hero h1 span {
+  color: var(--primary);
+}
 
 .hero p {
   font-size: 16px;
@@ -147,7 +161,9 @@ nav {
   transition: background 0.2s;
 }
 
-.btn-primary:hover { background: #1d4ed8; }
+.btn-primary:hover {
+  background: #1d4ed8;
+}
 
 .btn-secondary {
   font-size: 14px;
@@ -160,9 +176,9 @@ nav {
   transition: all 0.2s;
 }
 
-.btn-secondary:hover { 
-  border-color: rgba(255, 255, 255, 0.25); 
-  color: var(--text-main); 
+.btn-secondary:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+  color: var(--text-main);
 }
 
 /* 7. КАРТИ (CARDS) */
