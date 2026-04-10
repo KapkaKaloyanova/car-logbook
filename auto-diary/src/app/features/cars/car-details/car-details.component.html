@@ -1,1 +1,22 @@
-<p>car-details works!</p>
+<div>
+  @if (currentCar()) {
+    <div class="car-image">
+      <img [src]="currentCar()?.imageUrl || '/images/car-placeholder.png'" alt="Car image" />
+    </div>
+    <div class="car-info">
+      <h3>{{ currentCar()?.brand }} {{ currentCar()?.model }}</h3>
+      <p>Година: {{ currentCar()?.year }}</p>
+      <p>Двигател: {{ currentCar()?.engineType }}</p>
+      <p>Пробег: {{ currentCar()?.initialMileage }} км</p>
+      <p>Тип на гориво: {{ currentCar()?.fuelType }}</p>
+    </div>
+    @if (isOwner()) {
+      <div class="car-actions">
+        <a [routerLink]="['/cars', currentCar()?._id, 'edit']" class="btn-primary">Редактирай</a>
+        <a (click)="onDelete(currentCar()!._id)" class="btn-primary">Изтрий</a>
+      </div>
+    }
+  } @else {
+    <p>Loading...</p>
+  }
+</div>
