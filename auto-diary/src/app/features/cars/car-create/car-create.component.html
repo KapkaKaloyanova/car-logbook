@@ -1,1 +1,89 @@
-<p>car-create works!</p>
+<div class="auth-container">
+  <div class="auth-card">
+    <h2>Добави автомобил</h2>
+
+    <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="form-group">
+          <input type="text" formControlName="brand" placeholder="Марка" />
+          @if (createForm.get('brand')?.errors?.['required'] && createForm.get('brand')?.touched) {
+            <span>Марката е задължителна</span>
+          }
+        </div>
+
+        <div class="form-group">
+          <input type="text" formControlName="model" placeholder="Модел" />
+          @if (createForm.get('model')?.errors?.['required'] && createForm.get('model')?.touched) {
+            <span>Модлът е задължителен</span>
+          }
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group">
+          <input type="number" formControlName="year" placeholder="Година на производство" />
+          @if (createForm.get('year')?.errors?.['required'] && createForm.get('year')?.touched) {
+            <span>Годината е задължителна</span>
+          }
+          @if (createForm.get('year')?.errors?.['min'] && createForm.get('year')?.touched) {
+            <span>Годината не може да бъде по-малка от 1900</span>
+          }
+          @if (createForm.get('year')?.errors?.['max'] && createForm.get('year')?.touched) {
+            <span>Годината не може да бъде по-голяма от текущата</span>
+          }
+        </div>
+        <div class="form-group">
+          <input type="text" formControlName="engineType" placeholder="Двигател" />
+          @if (
+            createForm.get('engineType')?.errors?.['required'] &&
+            createForm.get('engineType')?.touched
+          ) {
+            <span>Двигателя е задължителен</span>
+          }
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <input type="number" formControlName="initialMileage" placeholder="Начален пробег" />
+          @if (
+            createForm.get('initialMileage')?.errors?.['required'] &&
+            createForm.get('initialMileage')?.touched
+          ) {
+            <span>Началният пробег е задължителен</span>
+          }
+          @if (
+            createForm.get('initialMileage')?.errors?.['min'] &&
+            createForm.get('initialMileage')?.touched
+          ) {
+            <span>Началният пробег не може да бъде по-малък от 0</span>
+          }
+        </div>
+        <div class="form-group">
+          <select formControlName="fuelType">
+            <option value="" disabled selected>Гориво</option>
+            <option value="benzin">Бензин</option>
+            <option value="diesel">Дизел</option>
+            <option value="hybrid">Хибрид</option>
+            <option value="electric">Електрически</option>
+            <option value="gas">Газ</option>
+          </select>
+          @if (
+            createForm.get('fuelType')?.errors?.['required'] && createForm.get('fuelType')?.touched
+          ) {
+            <span>Горивото е задължително</span>
+          }
+        </div>
+      </div>
+
+      <div class="form-group">
+        <input type="text" formControlName="imageUrl" placeholder="Линк към снимка" />
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" [disabled]="createForm.invalid" class="btn-primary auth-btn">
+          Създай
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
