@@ -1,1 +1,90 @@
-<p>car-edit works!</p>
+<div class="auth-container">
+  <div class="auth-card">
+    <h2>Редактирай автомобил</h2>
+
+    <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="form-group">
+          <input type="text" formControlName="brand" placeholder="Марка" />
+          @if (editForm.get('brand')?.errors?.['required'] && editForm.get('brand')?.touched) {
+            <p class="error">Марката е задължителна</p>
+          }
+        </div>
+
+        <div class="form-group">
+          <input type="text" formControlName="model" placeholder="Модел" />
+          @if (editForm.get('model')?.errors?.['required'] && editForm.get('model')?.touched) {
+            <p class="error">Модлът е задължителен</p>
+          }
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group">
+          <input type="number" formControlName="year" placeholder="Година на производство" />
+          @if (editForm.get('year')?.errors?.['required'] && editForm.get('year')?.touched) {
+            <p class="error">Годината е задължителна</p>
+          }
+          @if (editForm.get('year')?.errors?.['min'] && editForm.get('year')?.touched) {
+            <p class="error">Годината не може да бъде по-малка от 1900</p>
+          }
+          @if (editForm.get('year')?.errors?.['max'] && editForm.get('year')?.touched) {
+            <p class="error">Годината не може да бъде по-голяма от текущата</p>
+          }
+        </div>
+        <div class="form-group">
+          <input type="text" formControlName="engineType" placeholder="Двигател" />
+          @if (
+            editForm.get('engineType')?.errors?.['required'] &&
+            editForm.get('engineType')?.touched
+          ) {
+            <p class="error">Двигателя е задължителен</p>
+          }
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <input type="number" formControlName="initialMileage" placeholder="Начален пробег" />
+          @if (
+            editForm.get('initialMileage')?.errors?.['required'] &&
+            editForm.get('initialMileage')?.touched
+          ) {
+            <p class="error">Началният пробег е задължителен</p>
+          }
+          @if (
+            editForm.get('initialMileage')?.errors?.['min'] &&
+            editForm.get('initialMileage')?.touched
+          ) {
+            <p class="error">Началният пробег не може да бъде по-малък от 0</p>
+          }
+        </div>
+        <div class="form-group">
+          <select formControlName="fuelType">
+            <option value="" disabled selected>Гориво</option>
+            <option value="benzin">Бензин</option>
+            <option value="diesel">Дизел</option>
+            <option value="hybrid">Хибрид</option>
+            <option value="electric">Електрически</option>
+            <option value="gas">Газ</option>
+          </select>
+          @if (
+            editForm.get('fuelType')?.errors?.['required'] && editForm.get('fuelType')?.touched
+          ) {
+            <p class="error">Горивото е задължително</p>
+          }
+        </div>
+      </div>
+
+      <div class="form-group">
+        <input type="text" formControlName="imageUrl" placeholder="Линк към снимка" />
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" [disabled]="editForm.invalid" class="btn-primary auth-btn">
+          Редактирай
+        </button>
+        <a  class="reset-link" (click)="editForm.reset()">Изчисти формата</a>
+      </div>
+    </form>
+  </div>
+</div>
