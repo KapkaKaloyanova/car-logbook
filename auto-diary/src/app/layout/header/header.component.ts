@@ -1,15 +1,16 @@
-import { Component, computed, inject, OnInit, signal } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { Component, computed, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { CarService } from '../../core/services/car.service';
 import { Car } from '../../shared/interfaces/car';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-header',
   imports: [RouterLink, RouterLinkActive],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   private router = inject(Router);
   private authService = inject(AuthService);
   private carService = inject(CarService);
@@ -20,6 +21,8 @@ export class HeaderComponent implements OnInit {
   isDropdownOpen = signal(false);
 
   userCars = signal<Car[]>([]);
+  private subscription!: Subscription;
+
 
   toggleDropdown() {
     this.isDropdownOpen.update(val => !val);
@@ -36,9 +39,18 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.authService.isLoggedIn()) {
-      this.carService.getCarsByOwner(this.authService.currentUser()!._id).subscribe(cars => this.userCars.set(cars));
-    }
+    // Абониране за router events и презареждане на userCars след всяка навигация
+    this.subscription = this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        if (this.authService.isLoggedIn()) {
+          this.carService.getCarsByOwner(this.authService.currentUser()!._id)
+            .subscribe(cars => this.userCars.set(cars));
+        }
+      }
+    })
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
 }
