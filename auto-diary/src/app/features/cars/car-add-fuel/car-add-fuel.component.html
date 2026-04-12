@@ -1,1 +1,96 @@
-<p>car-add-fuel works!</p>
+<div class="auth-container">
+  <div class="auth-card">
+    <h2>Зареди гориво</h2>
+
+    <form [formGroup]="fuelRecordForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <input type="date" formControlName="date" placeholder="Дата на зареждане" />
+        @if (
+          fuelRecordForm.get('date')?.errors?.['required'] && fuelRecordForm.get('date')?.touched
+        ) {
+          <p class="error">Дата на зареждане е задължителна</p>
+        }
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <input type="text" formControlName="mileage" placeholder="Километраж" />
+          @if (
+            fuelRecordForm.get('mileage')?.errors?.['required'] &&
+            fuelRecordForm.get('mileage')?.touched
+          ) {
+            <p class="error">Километражът е задължителен</p>
+          }
+          @if (
+            fuelRecordForm.get('mileage')?.errors?.['min'] && fuelRecordForm.get('mileage')?.touched
+          ) {
+            <p class="error">Километражът не може да бъде по-малък от 0</p>
+          }
+        </div>
+        <div class="form-group">
+          <input type="number" formControlName="liters" placeholder="Количество гориво" />
+          @if (
+            fuelRecordForm.get('liters')?.errors?.['required'] &&
+            fuelRecordForm.get('liters')?.touched
+          ) {
+            <p class="error">Количеството гориво е задължително</p>
+          }
+          @if (
+            fuelRecordForm.get('liters')?.errors?.['min'] && fuelRecordForm.get('liters')?.touched
+          ) {
+            <p class="error">Количеството гориво не може да бъде по-малко от 0</p>
+          }
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <input type="number" formControlName="unitPrice" placeholder="Цена за литър" />
+          @if (
+            fuelRecordForm.get('unitPrice')?.errors?.['min'] &&
+            fuelRecordForm.get('unitPrice')?.touched
+          ) {
+            <p class="error">Цената за литър не може да бъде отрицателна</p>
+          }
+          @if (!fuelRecordForm.get('unitPrice')?.value && unitPrice()) {
+            <p>Изчислена цена за литър: {{ unitPrice() | number: '1.2-2' }} €/л</p>
+          }
+        </div>
+        <div class="form-group">
+          <input type="number" formControlName="price" placeholder="Цена" />
+          @if (
+            fuelRecordForm.get('price')?.errors?.['required'] &&
+            fuelRecordForm.get('price')?.touched
+          ) {
+            <p class="error">Цената на горивото е задължителна</p>
+          }
+          @if (
+            fuelRecordForm.get('price')?.errors?.['min'] && fuelRecordForm.get('price')?.touched
+          ) {
+            <p class="error">Цената не може да бъде отрицателна</p>
+          }
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <input type="text" formControlName="gasStation" placeholder="Бензиностанция" />
+        </div>
+        <div class="form-group">
+          <input type="text" formControlName="gasStationAddress" placeholder="Адрес" />
+        </div>
+      </div>
+      <div class="form-group">
+        <select formControlName="roadType">
+          <option value="" disabled selected>Тип на пътя</option>
+          <option value="city">Градско</option>
+          <option value="highway">Магистрала/Дълъг път</option>
+          <option value="offroad">оффроуд</option>
+        </select>
+      </div>
+      <div class="form-actions">
+        <button type="submit" [disabled]="fuelRecordForm.invalid" class="btn-primary auth-btn">
+          Запис на горивото
+        </button>
+        <a class="reset-link" (click)="onReset()">Изчисти формата</a>
+      </div>
+    </form>
+  </div>
+</div>
