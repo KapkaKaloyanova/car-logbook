@@ -21,7 +21,6 @@ export class CarAddFuelComponent implements OnInit, OnDestroy {
   unitPrice = signal<number | null>(null);
   private subscription!: Subscription;
 
-
   fuelRecordForm = new FormGroup({
     date: new FormControl<string>('', [Validators.required]),
     mileage: new FormControl<number | null>(null, [Validators.required, Validators.min(0)]),
@@ -40,6 +39,9 @@ export class CarAddFuelComponent implements OnInit, OnDestroy {
       }
     });
   }
+
+  errorMessage = '';
+
   onSubmit() {
     if (this.fuelRecordForm.invalid) {
       return;
@@ -54,13 +56,20 @@ export class CarAddFuelComponent implements OnInit, OnDestroy {
     }
 
     this.fuelService.createFuelRecord(fuelData).subscribe({
-      next: () => { this.router.navigate(['/cars', this.carId]) }
+      next: () => { this.router.navigate(['/cars', this.carId]) },
+      error: (err) => {
+        this.errorMessage = err.error?.message || 'Unexpected error occured';
+      }
     })
   }
 
-  onReset(){
+  onReset() {
     this.fuelRecordForm.reset({ roadType: 'city' });
     this.unitPrice.set(null);
+  }
+
+  onCancel() {
+    this.router.navigate(['/cars', this.carId]);
   }
 
   ngOnDestroy(): void {

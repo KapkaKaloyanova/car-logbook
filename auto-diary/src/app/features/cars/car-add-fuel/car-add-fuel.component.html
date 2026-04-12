@@ -89,7 +89,10 @@
         <button type="submit" [disabled]="fuelRecordForm.invalid" class="btn-primary auth-btn">
           Запис на горивото
         </button>
-        <a class="reset-link" (click)="onReset()">Изчисти формата</a>
+        <div class="row">
+            <a class="reset-link" (click)="onReset()">Изчисти формата</a>
+            <a class="reset-link" (click)="onCancel()">Откажи</a>
+        </div>
       </div>
     </form>
   </div>
