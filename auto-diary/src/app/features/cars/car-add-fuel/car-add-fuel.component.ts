@@ -18,6 +18,7 @@ export class CarAddFuelComponent implements OnInit, OnDestroy {
   private route = inject(ActivatedRoute);
 
   carId = this.route.snapshot.params['id'];
+  fuelId = this.route.snapshot.params['fuelId'];
   unitPrice = signal<number | null>(null);
   private subscription!: Subscription;
 
@@ -33,6 +34,22 @@ export class CarAddFuelComponent implements OnInit, OnDestroy {
   });
 
   ngOnInit(): void {
+    if (this.fuelId) {
+      this.fuelService.getFuelRecordById(this.fuelId).subscribe({
+        next: (record) => {
+          this.fuelRecordForm.patchValue({
+            date: record.date,
+            mileage: record.mileage,
+            liters: record.liters,
+            unitPrice: record.unitPrice,
+            price: record.price,
+            roadType: record.roadType,
+            gasStation: record.gasStation,
+            comment: record.comment
+          })
+        }
+      })
+    }
     this.subscription = this.fuelRecordForm.valueChanges.subscribe(val => {
       if (!val.unitPrice && val.price && val.liters) {
         this.unitPrice.set(Math.round((val.price / val.liters) * 100) / 100);
@@ -55,12 +72,22 @@ export class CarAddFuelComponent implements OnInit, OnDestroy {
       fuelData.unitPrice = (this.unitPrice()!);
     }
 
-    this.fuelService.createFuelRecord(fuelData).subscribe({
-      next: () => { this.router.navigate(['/cars', this.carId]) },
-      error: (err) => {
-        this.errorMessage = err.error?.message || 'Unexpected error occured';
-      }
-    })
+    if (this.fuelId) {
+      this.fuelService.editFuelRecord(this.fuelId, fuelData).subscribe({
+        next: () => { this.router.navigate(['/cars', this.carId]) },
+        error: (err) => {
+          this.errorMessage = err.error?.message || 'Unexpected error occured';
+        }
+      })
+    } else {
+      this.fuelService.createFuelRecord(fuelData).subscribe({
+        next: () => { this.router.navigate(['/cars', this.carId]) },
+        error: (err) => {
+          this.errorMessage = err.error?.message || 'Unexpected error occured';
+        }
+      })
+    }
+
   }
 
   onReset() {
