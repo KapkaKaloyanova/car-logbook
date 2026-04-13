@@ -40,7 +40,7 @@ export class AuthService {
     const { accessToken, ...userData } = response; // отделяме accessToken и userData от response
     localStorage.setItem('accessToken', accessToken); // записваме accessToken за interceptor-a
     localStorage.setItem('user', JSON.stringify(userData)); // записваме userData като стринг за refresh на страницата
-    this.user.set(userData); // обножиажаме сигнала с чистите данни
+    this.user.set(userData); // обновяваме сигнала с чистите данни
   }
 
   clearSession() {

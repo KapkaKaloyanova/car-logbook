@@ -33,7 +33,15 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
           router.navigate(['/login']);
         }
       } else if (err.status === 403) {
-        message = 'Forbidden. You do not have permission for this action';
+        // Проверяваме дали текущият URL съдържа някой от нашите Auth пътища
+        const isAuthRequest = AUTH_ENDPOINTS.some(endpoint => req.url.includes(endpoint));
+        if (isAuthRequest) {
+          message = 'Forbidden. You do not have permission for this action';
+        } else{
+          message = 'Session expired. Please log in again';
+          authService.clearSession();
+          router.navigate(['/login']);
+        }
       } else if (err.status === 404) {
         message = 'Resource not found';
       } else if (err.status === 409) {
