@@ -13,4 +13,15 @@ export class FuelService {
   createFuelRecord(fuelData: Partial<FuelRecord>): Observable<FuelRecord> {
     return this.httpClient.post<FuelRecord>(this.apiUrl, fuelData);
   }
+
+  getFuelRecordsById(carId: string): Observable<FuelRecord[]> {
+    return this.httpClient.get<FuelRecord[]>(`${this.apiUrl}?where=carId%3D%22${carId}%22`);
+  }
+
+  deleteFuelRecord(fuelId: string): Observable<void> {
+    return this.httpClient.delete<void>(`${this.apiUrl}/${fuelId}`);
+  }
+  editFuelRecord(fuelId: string, fuelData: Partial<FuelRecord>): Observable<FuelRecord> {
+    return this.httpClient.put<FuelRecord>(`${this.apiUrl}/${fuelId}`, fuelData);
+  }
 }
