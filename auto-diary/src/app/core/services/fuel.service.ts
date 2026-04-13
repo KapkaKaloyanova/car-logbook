@@ -24,4 +24,8 @@ export class FuelService {
   editFuelRecord(fuelId: string, fuelData: Partial<FuelRecord>): Observable<FuelRecord> {
     return this.httpClient.put<FuelRecord>(`${this.apiUrl}/${fuelId}`, fuelData);
   }
+
+  getFuelRecordById(fuelId:string): Observable<FuelRecord>{
+    return this.httpClient.get<FuelRecord>(`${this.apiUrl}/${fuelId}`);
+  }
 }
