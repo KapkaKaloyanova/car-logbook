@@ -1,4 +1,4 @@
-export interface Document {
+export interface DocumentRecord {
     _id: string;
     carId: string;
     price: number;
