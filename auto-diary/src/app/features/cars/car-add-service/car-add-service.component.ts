@@ -54,7 +54,14 @@ export class CarAddServiceComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.serviceRecordForm.invalid) {
+      return;
+    }
     const serviceRecordData = { ...this.serviceRecordForm.value, carId: this.carId } as Partial<ServiceRecord>;
+
+    // Премахване на празните незадължителни полета
+    if (!serviceRecordData.nextServiceDate) delete serviceRecordData.nextServiceDate;
+    if (!serviceRecordData.nextServiceMileage) delete serviceRecordData.nextServiceMileage;
 
     if (this.serviceId) {
       this.serviceRecordService.editServiceRecord(this.serviceId, serviceRecordData).subscribe({
@@ -76,7 +83,7 @@ export class CarAddServiceComponent implements OnInit {
   onReset() {
     this.serviceRecordForm.reset();
   }
-  onCancel(){
+  onCancel() {
     this.router.navigate(['/cars', this.carId]);
   }
 

@@ -6,6 +6,6 @@ export interface ServiceRecord {
     mileage: number;
     price: number;
     date: string;
-    nextServiceDate: string;
-    nextServiceMileage: number;
+    nextServiceDate?: string;
+    nextServiceMileage?: number;
 }
