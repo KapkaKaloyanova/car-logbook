@@ -31,7 +31,9 @@ export const routes: Routes = [
     { path: 'cars/:id/add-fuel', component: CarAddFuelComponent, canActivate: [authGuard] },
     { path: 'cars/:id/edit-fuel/:fuelId', component: CarAddFuelComponent, canActivate: [authGuard] },
     { path: 'cars/:id/add-service', component: CarAddServiceComponent, canActivate: [authGuard] },
+    { path: 'cars/:id/edit-service/:serviceId', component: CarAddServiceComponent, canActivate: [authGuard] },
     { path: 'cars/:id/add-document', component: CarAddDocumentComponent, canActivate: [authGuard] },
+    { path: 'cars/:id/edit-document/:documentId', component: CarAddDocumentComponent, canActivate: [authGuard] },
 
     { path: '**', component: NotFoundComponent }
 
