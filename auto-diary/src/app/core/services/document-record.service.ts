@@ -6,7 +6,7 @@ import { DocumentRecord } from '../../shared/interfaces/document-record';
 @Injectable({
   providedIn: 'root',
 })
-export class DocumentService {
+export class DocumentRecordService {
   private httpClient = inject(HttpClient);
   private apiUrl = 'http://localhost:3030/data/documents';
 
