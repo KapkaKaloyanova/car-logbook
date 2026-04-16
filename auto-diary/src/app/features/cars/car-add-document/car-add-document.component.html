@@ -26,34 +26,44 @@
         }
       </div>
       <div class="form-group">
-        <input type="date" formControlName="date" placeholder="Дата на издаване" />
+        <input type="text" formControlName="title" placeholder="Заглавие" />
         @if (
-          documentRecordForm.get('date')?.errors?.['required'] &&
-          documentRecordForm.get('date')?.touched
+          documentRecordForm.get('title')?.errors?.['required'] &&
+          documentRecordForm.get('title')?.touched
         ) {
-          <p class="error">Датата на издаване е задължителна</p>
+          <p class="error">Заглавието е задължително</p>
         }
       </div>
       <div class="form-group">
-        <input type="number" formControlName="price" placeholder="Цена" />
-        @if (
-          documentRecordForm.get('price')?.errors?.['required'] &&
-          documentRecordForm.get('price')?.touched
-        ) {
-          <p class="error">Цената е задължителна</p>
-        }
-        @if (
-          documentRecordForm.get('price')?.errors?.['min'] &&
-          documentRecordForm.get('price')?.touched
-        ) {
-          <p class="error">Цената не може да бъде отрицателна</p>
-        }
+        <input type="text" formControlName="brand" placeholder="Марка" />
       </div>
       <div class="row">
         <div class="form-group">
-          <input type="text" formControlName="brand" placeholder="Марка" />
+          <input type="date" formControlName="date" placeholder="Дата на издаване" />
+          @if (
+            documentRecordForm.get('date')?.errors?.['required'] &&
+            documentRecordForm.get('date')?.touched
+          ) {
+            <p class="error">Датата на издаване е задължителна</p>
+          }
+        </div>
+        <div class="form-group">
+          <input type="number" formControlName="price" placeholder="Цена" />
+          @if (
+            documentRecordForm.get('price')?.errors?.['required'] &&
+            documentRecordForm.get('price')?.touched
+          ) {
+            <p class="error">Цената е задължителна</p>
+          }
+          @if (
+            documentRecordForm.get('price')?.errors?.['min'] &&
+            documentRecordForm.get('price')?.touched
+          ) {
+            <p class="error">Цената не може да бъде отрицателна</p>
+          }
         </div>
       </div>
+
       <div class="form-group">
         <input type="date" formControlName="expiryDate" placeholder="Дата на изтичане" />
       </div>

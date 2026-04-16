@@ -21,6 +21,7 @@ export class CarAddDocumentComponent implements OnInit {
 
   documentRecordForm = new FormGroup({
     type: new FormControl<string>('', [Validators.required]),
+    title: new FormControl<string>('', [Validators.required]),
     date: new FormControl<string>('', [Validators.required]),
     price: new FormControl<number | null>(null, [Validators.required, Validators.min(0)]),
     brand: new FormControl<string>(''),
