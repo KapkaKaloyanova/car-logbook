@@ -1,0 +1,181 @@
+.records-detail {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Контейнер за бутона над таблицата */
+.records-detail > .btn-primary {
+  display: inline-block;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  background-color: var(--primary);
+  color: white;
+  transition: all 0.2s;
+}
+
+/* Контейнер за картите */
+.documents-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+  margin-top: 20px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Стил на самата карта */
+.document-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-card);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  /* Правим прехода по-плавен и бавен */
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease;
+}
+
+/* Корекция при посочване (Hover) */
+.document-card:hover {
+  background: rgba(255, 255, 255, 0.04);
+  /* Намаляваме подскачането на 2px за по-лек ефект */
+  transform: translateY(-2px);
+  /* Премахваме border-color, за да няма дразнещ контур */
+  border-color: var(--border-card);
+  /* Добавяме много лека сянка вместо контур за дълбочина */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Заглавие и Дата */
+.card-header h3 {
+  margin: 0;
+  color: var(--text-main);
+  font-size: 18px;
+}
+
+.record-date {
+  font-size: 12px;
+  font-style: italic;
+  color: var(--text-secondary);
+  display: block;
+  margin-bottom: 15px;
+}
+
+/* Информация в картата */
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.label {
+  color: var(--text-secondary);
+}
+.value {
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+.comment {
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 10px;
+}
+
+/* Секция за напомняне на следващ сервиз */
+.next-document-info {
+  margin-top: 15px;
+  padding: 12px;
+  background: rgba(251, 191, 36, 0.05); /* Много лек жълтеникав фон за акцент */
+  border-radius: 8px;
+  border-left: 3px solid #fbbf24; /* Жълта линия отстрани за внимание */
+}
+
+.next-document-info p {
+  margin: 0 0 4px 0;
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.next-document-info span {
+  color: #fbbf24; /* Топъл жълт цвят за самата дата/километри */
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Секция действия - ТВОИТЕ БУТОНИ ТУК */
+.card-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: auto; /* Винаги в дъното на картата */
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Общ стил за линковете */
+.action-link {
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer !important;
+  transition: all 0.2s ease;
+  display: inline-block;
+}
+
+/* РЕДАКТИРАЙ - Пълно нулиране на браузърните цветове */
+.action-link.edit,
+.action-link.edit:link,
+.action-link.edit:visited,
+.action-link.edit:active {
+  color: #ffffff !important; /* Бяло */
+  text-decoration: none !important;
+}
+
+.action-link.edit:hover {
+  color: var(--primary) !important; /* Става син само при посочване */
+  text-decoration: underline !important;
+}
+
+/* ИЗТРИЙ - Пълно нулиране */
+.action-link.delete,
+.action-link.delete:link,
+.action-link.delete:visited,
+.action-link.delete:active {
+  color: #f87171 !important; /* Червено */
+  text-decoration: none !important;
+}
+
+.action-link.delete:hover {
+  color: #ef4444 !important;
+  text-decoration: underline !important;
+}
+
+/* Разделителят */
+.divider {
+  color: var(--text-secondary);
+  opacity: 0.3;
+  margin: 0 4px;
+}
+
+/* Анимация */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

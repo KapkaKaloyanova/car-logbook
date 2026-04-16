@@ -1,1 +1,48 @@
-<p>car-documents works!</p>
+<div class="records-detail">
+  <a [routerLink]="['/cars', car()._id, 'add-document']" class="btn-primary">Нов документ</a>
+
+  <div class="documents-grid">
+    @for (documentRecord of documentRecords(); track documentRecord._id) {
+      <div class="document-card">
+        <div class="card-header">
+          <h4>{{ documentRecord.type | documentType }}</h4>
+          <h3>{{ documentRecord.title }}</h3>
+          <span class="record-date">{{ documentRecord.date }}</span>
+        </div>
+        <div class="card-body">
+          <div class="info-item">
+            <span class="label">Цена</span>
+            <span class="value">{{ documentRecord.price | number: '1.2-2' }} €</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Марка</span>
+            <span class="value">{{ documentRecord.brand || '---' }}</span>
+          </div>
+          <div class="next-document-info">
+            <p>Следващ документ:</p>
+            <span>{{ documentRecord.expiryDate || 'Не е зададено' }}</span>
+            @if (documentRecord.comment) {
+              <div class="comment"> {{ documentRecord.comment || '---' }} </div>
+            }
+          </div>
+          
+        </div>
+
+        <div class="card-actions">
+          <a
+            [routerLink]="['/cars', car()._id, 'edit-document', documentRecord._id]"
+            class="action-link edit"
+            >Редактирай</a
+          >
+          <span class="divider">|</span>
+          <a (click)="onDelete(documentRecord._id)" class="action-link delete">Изтрий</a>
+        </div>
+      </div>
+    } @empty {
+      <div class="empty-state-container">Все още няма добавени документи</div>
+      <a [routerLink]="['/cars', car()._id, 'add-document']" class="add-inline-link"
+        >Добавете първия документ оттук</a
+      >
+    }
+  </div>
+</div>
