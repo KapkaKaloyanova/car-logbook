@@ -61,15 +61,12 @@
         <div class="form-group">
           <input type="number" formControlName="price" placeholder="Цена" />
           @if (
-            fuelRecordForm.get('price')?.errors?.['required'] &&
-            fuelRecordForm.get('price')?.touched
-          ) {
-            <p class="error">Цената на горивото е задължителна</p>
-          }
-          @if (
             fuelRecordForm.get('price')?.errors?.['min'] && fuelRecordForm.get('price')?.touched
           ) {
             <p class="error">Цената не може да бъде отрицателна</p>
+          }
+          @if (!fuelRecordForm.get('price')?.value && totalPrice()) {
+            <p>Изчислена цена: {{ totalPrice() | number: '1.2-2' }} €</p>
           }
         </div>
       </div>
@@ -97,16 +94,15 @@
           <button type="submit" [disabled]="fuelRecordForm.invalid" class="btn-primary auth-btn">
             Редактирай горивото
           </button>
-
         } @else {
           <button type="submit" [disabled]="fuelRecordForm.invalid" class="btn-primary auth-btn">
             Запис на горивото
           </button>
         }
-          <div class="row">
-            <a class="reset-link" (click)="onReset()">Изчисти формата</a>
-            <a class="reset-link" (click)="onCancel()">Откажи</a>
-          </div>
+        <div class="row">
+          <a class="reset-link" (click)="onReset()">Изчисти формата</a>
+          <a class="reset-link" (click)="onCancel()">Откажи</a>
+        </div>
       </div>
     </form>
   </div>

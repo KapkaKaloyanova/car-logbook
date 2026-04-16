@@ -24,6 +24,7 @@ export class CarAddFuelComponent implements OnInit, OnDestroy {
   carId = this.route.snapshot.params['id'];
   fuelId = this.route.snapshot.params['fuelId'];
   unitPrice = signal<number | null>(null);
+  totalPrice = signal<number | null>(null);
   private subscription!: Subscription;
 
 
@@ -33,7 +34,7 @@ export class CarAddFuelComponent implements OnInit, OnDestroy {
     mileage: new FormControl<number | null>(null, [Validators.required, Validators.min(0)]),
     liters: new FormControl<number | null>(null, [Validators.required, Validators.min(0)]),
     unitPrice: new FormControl<number | null>(null, [Validators.min(0)]),
-    price: new FormControl<number | null>(null, [Validators.required, Validators.min(0)]),
+    price: new FormControl<number | null>(null, [Validators.min(0)]),
     roadType: new FormControl<FuelRecord['roadType']>('градско'),
     gasStation: new FormControl<string>(''),
     comment: new FormControl<string>(''),
@@ -47,7 +48,7 @@ export class CarAddFuelComponent implements OnInit, OnDestroy {
         }
       }
     });
-    
+
     if (this.fuelId) {
       this.fuelService.getFuelRecordById(this.fuelId).subscribe({
         next: (record) => {
@@ -68,6 +69,9 @@ export class CarAddFuelComponent implements OnInit, OnDestroy {
       if (!val.unitPrice && val.price && val.liters) {
         this.unitPrice.set(Math.round((val.price / val.liters) * 100) / 100);
       }
+      if (!val.price && val.unitPrice && val.liters) {
+        this.totalPrice.set(Math.round(val.unitPrice * val.liters));
+      }
     });
   }
 
@@ -84,6 +88,10 @@ export class CarAddFuelComponent implements OnInit, OnDestroy {
 
     if (!fuelData.unitPrice && this.unitPrice()) {
       fuelData.unitPrice = (this.unitPrice()!);
+    }
+
+    if (!fuelData.price && this.totalPrice()) {
+      fuelData.price = (this.totalPrice()!);
     }
 
     if (this.fuelId) {
@@ -107,6 +115,7 @@ export class CarAddFuelComponent implements OnInit, OnDestroy {
   onReset() {
     this.fuelRecordForm.reset({ roadType: 'градско' });
     this.unitPrice.set(null);
+    this.totalPrice.set(null);
   }
 
   onCancel() {
