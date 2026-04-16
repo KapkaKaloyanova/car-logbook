@@ -40,6 +40,10 @@ export class CarEditComponent implements OnInit {
       .subscribe({
         next: car => {
           this.currentCar.set(car);
+          if (!this.isOwner()) {
+            this.router.navigate(['/cars', this.carId]);
+            return;
+          }
           this.editForm.patchValue({
             brand: car.brand,
             model: car.model,
