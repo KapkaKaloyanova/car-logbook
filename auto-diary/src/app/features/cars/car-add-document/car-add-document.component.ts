@@ -3,6 +3,8 @@ import { DocumentRecordService } from '../../../core/services/document-record.se
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { DocumentRecord } from '../../../shared/interfaces/document-record';
+import { CarService } from '../../../core/services/car.service';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-car-add-document',
@@ -14,6 +16,8 @@ export class CarAddDocumentComponent implements OnInit {
   private documentRecordService = inject(DocumentRecordService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
+  private carService = inject(CarService);
+  private authService = inject(AuthService);
 
   carId = this.route.snapshot.params['id'];
   documentId = this.route.snapshot.params['documentId'];
@@ -30,6 +34,15 @@ export class CarAddDocumentComponent implements OnInit {
   })
 
   ngOnInit(): void {
+    this.carService.getCarById(this.carId).subscribe({
+      next: (car) => {
+        if (car._ownerId !== this.authService.currentUser()?._id) {
+          this.router.navigate(['/cars', this.carId]);
+        }
+      }
+    });
+
+
     if (this.documentId) {
       this.documentRecordService.getDocumentRecordById(this.documentId)
         .subscribe({

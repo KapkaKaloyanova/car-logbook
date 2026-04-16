@@ -5,6 +5,8 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { FuelRecord } from '../../../shared/interfaces/fuel-record';
 import { DecimalPipe } from '@angular/common';
 import { Subscription } from 'rxjs';
+import { CarService } from '../../../core/services/car.service';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-car-add-fuel',
@@ -16,11 +18,14 @@ export class CarAddFuelComponent implements OnInit, OnDestroy {
   private fuelService = inject(FuelService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
+  private carService = inject(CarService);
+  private authService = inject(AuthService)
 
   carId = this.route.snapshot.params['id'];
   fuelId = this.route.snapshot.params['fuelId'];
   unitPrice = signal<number | null>(null);
   private subscription!: Subscription;
+
 
 
   fuelRecordForm = new FormGroup({
@@ -35,6 +40,14 @@ export class CarAddFuelComponent implements OnInit, OnDestroy {
   });
 
   ngOnInit(): void {
+    this.carService.getCarById(this.carId).subscribe({
+      next: (car) => {
+        if (car._ownerId !== this.authService.currentUser()?._id) {
+          this.router.navigate(['/cars', this.carId]);
+        }
+      }
+    });
+    
     if (this.fuelId) {
       this.fuelService.getFuelRecordById(this.fuelId).subscribe({
         next: (record) => {
