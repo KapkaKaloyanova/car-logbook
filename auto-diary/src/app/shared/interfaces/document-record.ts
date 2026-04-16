@@ -4,5 +4,7 @@ export interface DocumentRecord {
     price: number;
     type: 'insurance' | 'civil_liability' | 'tax' | 'vignette' | 'other';
     date: string;
-    expiryDate: string;
+    brand?: string;
+    expiryDate?: string;
+    comment?: string;
 }

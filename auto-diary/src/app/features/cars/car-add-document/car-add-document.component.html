@@ -1,1 +1,93 @@
-<p>car-add-document works!</p>
+<div class="auth-container">
+  <div class="auth-card">
+    @if (documentId) {
+      <h2>Редактирай документ</h2>
+    } @else {
+      <h2>Създай документ</h2>
+    }
+
+    <form [formGroup]="documentRecordForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <select formControlName="type">
+          <option value="" aria-placeholder="Изберете типа на документа" disabled selected>
+            Тип на документа
+          </option>
+          <option value="insurance">Застраховка</option>
+          <option value="civil_liability">Гражданска отговорност</option>
+          <option value="tax">Данък</option>
+          <option value="vignette">Винетка</option>
+          <option value="other">Друго</option>
+        </select>
+        @if (
+          documentRecordForm.get('type')?.errors?.['required'] &&
+          documentRecordForm.get('type')?.touched
+        ) {
+          <p class="error">Типът на документа е задължителен</p>
+        }
+      </div>
+      <div class="form-group">
+        <input type="date" formControlName="date" placeholder="Дата на издаване" />
+        @if (
+          documentRecordForm.get('date')?.errors?.['required'] &&
+          documentRecordForm.get('date')?.touched
+        ) {
+          <p class="error">Датата на издаване е задължителна</p>
+        }
+      </div>
+      <div class="form-group">
+        <input type="number" formControlName="price" placeholder="Цена" />
+        @if (
+          documentRecordForm.get('price')?.errors?.['required'] &&
+          documentRecordForm.get('price')?.touched
+        ) {
+          <p class="error">Цената е задължителна</p>
+        }
+        @if (
+          documentRecordForm.get('price')?.errors?.['min'] &&
+          documentRecordForm.get('price')?.touched
+        ) {
+          <p class="error">Цената не може да бъде отрицателна</p>
+        }
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <input type="text" formControlName="brand" placeholder="Марка" />
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="date" formControlName="expiryDate" placeholder="Дата на изтичане" />
+      </div>
+
+      <div class="form-group">
+        <input type="text" formControlName="comment" placeholder="Коментар" />
+      </div>
+
+      @if (errorMessage) {
+        <p class="error">{{ errorMessage }}</p>
+      }
+      <div class="form-actions">
+        @if (documentId) {
+          <button
+            type="submit"
+            [disabled]="documentRecordForm.invalid"
+            class="btn-primary auth-btn"
+          >
+            Редактирай записа на документа
+          </button>
+        } @else {
+          <button
+            type="submit"
+            [disabled]="documentRecordForm.invalid"
+            class="btn-primary auth-btn"
+          >
+            Запис на документа
+          </button>
+        }
+        <div class="row">
+          <a class="reset-link" (click)="onReset()">Изчисти формата</a>
+          <a class="reset-link" (click)="onCancel()">Откажи</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

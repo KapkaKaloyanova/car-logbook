@@ -1,0 +1,208 @@
+/* Използваме същия контейнер за центриране като при Login/Register */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 70px); 
+  padding: 40px 20px;
+}
+
+/* Стилизация на картата */
+.auth-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 12px;
+  padding: 40px;
+  width: 100%;
+  max-width: 500px; /* Малко по-широка от логина, за да побере повечето полета */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  text-align: center;
+}
+
+.auth-card h2 {
+  margin-bottom: 30px;
+  color: var(--text-main);
+  font-size: 24px;
+}
+
+/* Контейнер за всяко поле */
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Стил за Label на всяко поле */
+.form-group label {
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin-bottom: 6px;
+  margin-left: 4px;
+}
+
+/* Общ стил за Input и Select */
+input, select {
+  width: 100%;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-card);
+  border-radius: 8px;
+  color: var(--text-main);
+  font-size: 16px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+input:focus, select:focus {
+  border-color: var(--primary);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Специфични стилове за Select (падащото меню) */
+select {
+  cursor: pointer;
+  appearance: none; /* Премахва системната стрелка */
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 18px;
+}
+
+/* Оправяме цвета на опциите вътре в списъка */
+option {
+  background-color: #1a1d24; /* Тъмният цвят*/
+  color: var(--text-main);
+}
+
+/* Грешки под полетата */
+.error-text {
+  color: #ff4d4d;
+  font-size: 12px;
+  margin-top: 5px;
+  margin-left: 4px;
+}
+
+/* Контейнер за бутона */
+.form-actions {
+  margin-top: 30px;
+}
+
+/* Бутонът (като btn-primary стил) */
+.auth-btn {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: transform 0.1s, background-color 0.2s;
+}
+
+.auth-btn:hover:not(:disabled) {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.auth-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: grayscale(0.8);
+}
+
+.auth-btn:disabled:hover {
+  transform: none;
+}
+
+.reset-link {
+  display: inline-block; /* Позволява добавянето на margin и padding */
+  margin-top: 15px;      /* Разстояние от горния бутон */
+  font-size: 14px;
+  color: var(--text-secondary);
+  text-decoration: none; /* Премахва долната черта по подразбиране */
+  cursor: pointer;
+  transition: all 0.2s;
+  opacity: 0.8;
+}
+
+.reset-link:hover {
+  color: var(--primary); /* Променя цвета на основния при посочване */
+  opacity: 1;
+  text-decoration: underline; /* По желание: подчертаване само при hover */
+}
+
+/* Центриране, ако искаш да е под бутона по средата */
+.form-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Помощен клас за два инпута на един ред */
+.row {
+  display: flex;
+  gap: 15px;
+}
+
+.row .form-group {
+  flex: 1;
+}
+
+/* Долният линк (Footer) */
+.auth-footer {
+  margin-top: 25px;
+  border-top: 1px solid var(--border-card);
+  padding-top: 20px;
+}
+
+.auth-footer a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+/* p.error {
+    color: var(--color-danger);
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 0 !important;
+    margin-top: 0.25rem;
+    background: transparent !important;
+} */
+
+/* Стил за заглавния label (Настройки за напомняне) */
+form > label {
+  display: block;
+  text-align: left;
+  color: var(--text-main);
+  font-size: 15px;
+  font-weight: 600;
+  margin: 25px 0 15px 4px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Лека разделителна линия */
+  width: 100%;
+}
+
+/* Оправяме подредбата на действията (Reset и Cancel) */
+.form-actions .row {
+  width: 100%;
+  justify-content: center;
+  gap: 25px; /* Разстояние между двата линка */
+  margin-top: 5px;
+}
+
+/* Стил за грешките, за да не "подскачат" полетата */
+p.error {
+  color: #ff4d4d;
+  font-size: 12px;
+  margin-top: 4px;
+  margin-left: 4px;
+  text-align: left;
+}
+
+/* Малък фикс за input тип date (да изглежда еднакво с другите) */
+input[type="date"] {
+  font-family: inherit;
+}
