@@ -3,6 +3,7 @@ export interface User {
     email: string;
     username: string;
     tel: string;
+    _createdOn?: number;
 }
 
 export interface UserLogin {

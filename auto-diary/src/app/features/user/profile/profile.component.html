@@ -1,1 +1,77 @@
-<p>profile works!</p>
+<div class="user-profile-container">
+  @if (currentUser()) {
+    <section class="profile-header-section">
+      <div class="profile-card">
+        <div class="profile-avatar">
+          {{ currentUser()?.username?.charAt(0)?.toUpperCase() }}
+        </div>
+        <div class="profile-info">
+          <div class="profile-title-container">
+            <h2>{{ currentUser()?.username?.toUpperCase() }}'s профил</h2>
+            @if (!isEditing()) {
+              <button (click)="isEditing.set(true)" class="icon-btn-edit" title="Редактирай">
+                ✎
+              </button>
+            }
+          </div>
+
+          @if (!isEditing()) {
+            <div class="info-grid">
+              <div class="info-item">
+                <span class="label">Имейл</span>
+                <span class="value">{{ currentUser()?.email }}</span>
+              </div>
+              <div class="info-item">
+                <span class="label">Телефон</span>
+                <span class="value">{{ currentUser()?.tel || 'Не е посочен' }}</span>
+              </div>
+              <div class="info-item">
+                <span class="label">Дата на регистрация</span>
+                <span class="value">{{ currentUser()?._createdOn | date: 'dd.MM.yyyy' }}</span>
+              </div>
+            </div>
+          } @else {
+            <form [formGroup]="userProfileForm" (ngSubmit)="onSubmit()" class="edit-profile-form">
+              <div class="info-grid edit-mode">
+                <div class="info-item">
+                  <span class="label">Потребителско име</span>
+                  <input type="text" formControlName="username" class="inline-input" />
+                </div>
+                <div class="info-item">
+                    <span class="label">Имейл</span>
+                    <input type="email" formControlName="email" class="inline-input" />
+                </div>
+                <div class="info-item">
+                    <span class="label">Телефон</span>
+                    <input type="tel" formControlName="tel" class="inline-input" />
+                </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-save" [disabled]="userProfileForm.invalid">Запази</button>
+                        <button type="button" class="btn-cancel" (click)="isEditing.set(false)">Откажи</button>
+                    </div>
+                </div>
+            </form>
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="user-cars-section">
+      <div class="section-title">
+        <h2>Моите автомобили</h2>
+        <span class="car-count">{{ cars().length }} превозни средства</span>
+      </div>
+
+      <div class="cars-gallery">
+        @for (car of cars(); track car._id) {
+          <app-car-card [car]="car" />
+        } @empty {
+          <div class="empty-cars">
+            <p>Все още не сте добавили автомобили към вашия профил.</p>
+            <a routerLink="/cars/create" class="add-inline-link">Добави първата си кола тук</a>
+          </div>
+        }
+      </div>
+    </section>
+  }
+</div>
