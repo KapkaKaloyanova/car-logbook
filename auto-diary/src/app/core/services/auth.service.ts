@@ -48,6 +48,20 @@ export class AuthService {
     localStorage.removeItem('user');
     this.user.set(null);
   }
+
+  updateProfile(userId: string, userData: Partial<User>): Observable<void> {
+    return this.httpClient.put<void>(`${this.apiUrl}/${userId}`, userData);
+  }
+
+  updateUser(userData: Partial<User>) {
+    const updated = {
+      ...this.user()!,
+      ...userData
+    };
+    localStorage.setItem('user', JSON.stringify(updated));
+    this.user.set(updated);
+
+  }
 }
 
 
