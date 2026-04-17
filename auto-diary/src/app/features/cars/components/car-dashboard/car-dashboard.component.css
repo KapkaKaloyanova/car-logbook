@@ -1,0 +1,143 @@
+/* Основен контейнер - подрежда всичко в решетка */
+.dashboard-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding: 20px 0;
+}
+
+/* Известията (Alerts) - заемат целия горен ред */
+.alert-section {
+  width: 100%; /* Заема целия ред */
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-left: 5px solid #ffcc00 !important;
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  margin-bottom: 10px; /* Малко разстояние преди грида */
+}
+
+/* Общ стил за grid-container, който да държи трите карти на един ред */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+/* Общ стил за трите карти (Гориво, Сервиз, Документи) */
+.section {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 16px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Хедър - тук са заглавието и големият бутон */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Заглавие - фиксирано на 2 реда за перфектно подравняване */
+.double-line {
+  margin: 0;
+  font-size: 1.2rem;
+  line-height: 1.2;
+  min-height: 2.4em; /* Поддържа линията дори при 1 ред текст */
+  display: flex;
+  align-items: center;
+  color: var(--text-main);
+}
+
+/* ГОЛЕМИЯТ СИН БУТОН + */
+.btn-add-large {
+  width: 50px;
+  height: 50px;
+  background: var(--primary); /* Използва твоя основен син цвят */
+  color: white;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 32px;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.btn-add-large:hover {
+  transform: scale(1.08);
+  filter: brightness(1.2);
+}
+
+/* Редовете със записи - фиксирани на 50px височина за симетрия */
+.record-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  padding: 0 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.record-item:hover {
+  background: rgba(255, 255, 255, 0.03);
+  padding-left: 15px;
+  color: var(--primary);
+}
+
+/* Разпределяне на данните в реда */
+.record-item span {
+  display: inline-block;
+  font-size: 0.95rem;
+}
+.record-item .date {
+  width: 90px;
+  flex-shrink: 0;
+  text-align: left;
+  color: var(--text-secondary);
+}
+.record-item .info {
+  flex-grow: 1;
+  padding: 1 15px;
+  text-align: center;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.record-item .price {
+  width: 70px;
+  flex-shrink: 0;
+  text-align: right;
+  color: var(--primary);
+  font-weight: bold;
+}
+
+/* Стил за алертите */
+.alert-item {
+  background: rgba(255, 204, 0, 0.1);
+  color: #ffcc00;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+/* Мобилен изглед - една колона на малък екран */
+@media (max-width: 950px) {
+  .sections {
+    grid-template-columns: 1fr;
+  }
+}

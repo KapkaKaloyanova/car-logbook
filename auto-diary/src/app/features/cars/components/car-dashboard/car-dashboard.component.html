@@ -1,1 +1,74 @@
-<p>car-dashboard works!</p>
+<div class="dashboard-sections">
+  @if (alerts().length > 0) {
+    <div class="section alert-section">
+      <div class="section-header">
+        <h3 class="double-line">⚠️ Известия</h3>
+      </div>
+      <div class="alert-list">
+        @for (alert of alerts(); track $index) {
+          <div class="alert-item">
+            {{ alert }}
+          </div>
+        }
+      </div>
+    </div>
+  }
+
+  <div class="grid-container">
+    <div class="section">
+      <div class="section-header">
+        <h3 class="double-line">Последно <br />зареждане</h3>
+        <a [routerLink]="['/cars', car()._id, 'add-fuel']" class="btn-add-large" title="Добави">+</a>
+      </div>
+      <div class="record-list">
+        @for (fuelRec of recentFuelRecords(); track $index) {
+          <div class="record-item clickable" [routerLink]="['/cars', car()._id, 'edit-fuel', fuelRec._id]">
+            <span class="date">{{ fuelRec.date | date: 'd MMMM y' : '' : 'bg' }}</span>
+            <span class="info">{{ fuelRec.liters }} л</span>
+            <span class="price">{{ fuelRec.price }} €</span>
+          </div>
+        } @empty {
+          <div class="record-item empty-state">Няма регистрирани зареждания</div>
+        }
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <h3 class="double-line">Последен <br />сервиз</h3>
+        <a [routerLink]="['/cars', car()._id, 'add-service']" class="btn-add-large" title="Добави">+</a>
+      </div>
+      <div class="record-list">
+        @for (serviceRec of recentServiceRecords(); track $index) {
+          <div class="record-item clickable" [routerLink]="['/cars', car()._id, 'edit-service', serviceRec._id]">
+            <span class="date">{{ serviceRec.date | date: 'd MMMM y' : '' : 'bg' }}</span>
+            <span class="info">{{ serviceRec.type }}</span>
+            <span class="price">{{ serviceRec.price }} €</span>
+          </div>
+        } @empty {
+          <div class="record-item empty-state">Няма регистрирани сервизи</div>
+        }
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <h3 class="double-line">Последен <br />документ</h3>
+        <a [routerLink]="['/cars', car()._id, 'add-document']" class="btn-add-large" title="Добави"
+          >+</a
+        >
+      </div>
+      <div class="record-list">
+        @for (documentRec of recentDocumentRecords(); track $index) {
+          <div class="record-item clickable" [routerLink]="['/cars', car()._id, 'edit-document', documentRec._id]">
+            <span class="date">{{ documentRec.date | date: 'd MMMM y' : '' : 'bg' }}</span>
+            <span class="info">{{ documentRec.title }}</span>
+            <span class="price">{{ documentRec.price }} €</span>
+          </div>
+        } @empty {
+          <div class="record-item empty-state">Няма регистрирани документи</div>
+        }
+      </div>
+    </div>
+  </div>
+</div>
