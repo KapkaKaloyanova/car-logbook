@@ -1,11 +1,13 @@
 <header>
   <nav>
-    <div class="logo" routerLink="/home" style="cursor: pointer;">Auto<span>Diary</span></div>
+    <div class="logo" routerLink="/home" style="cursor: pointer">Auto<span>Diary</span></div>
 
     <div class="nav-links">
       @if (isLoggedIn()) {
         <div class="dropdown" (mouseleave)="closeDropdown()">
-          <span class="nav-link nav-btn" (click)="toggleDropdown()" style="cursor: pointer;">моите коли ▼</span>
+          <span class="nav-link nav-btn" (click)="toggleDropdown()" style="cursor: pointer"
+            >моите коли ▼</span
+          >
           @if (isDropdownOpen()) {
             <div class="dropdown-menu">
               @for (car of userCars(); track car._id) {
@@ -25,9 +27,26 @@
         <a class="nav-link nav-btn" routerLink="/user" routerLinkActive="active"
           >{{ username() }}'s профил</a
         >
-        <div class="nav-icons">
-          <span class="notification-bell">🔔</span>
+        <!-- alert Bell -->
+        <div class="nav-icons" >
+          <div class="dropdown" >
+            <div class="bell-wrapper">
+              <span class="notification-bell" (click)="alertToggleDropdown()">🔔</span>
+              @if (alerts().length >= 0) {
+                <span class="notification-count">{{ alerts().length }}</span>
+              }
+              @if(isAlertsOpen()){
+                <div class="dropdown-menu alerts-dropdown">
+                  @for (alert of alerts(); track $index) {
+                    <div class="dropdown-alert-item">{{alert}}</div>
+                  }
+                </div>
+              }
+            </div>
+
+          </div>
         </div>
+
         <button class="nav-btn" (click)="logout()">изход</button>
       } @else {
         <a class="nav-link nav-btn" routerLink="/cars" routerLinkActive="active">автомобили</a>
