@@ -7,7 +7,8 @@
       <div class="alert-list">
         @for (alert of alerts(); track $index) {
           <div class="alert-item">
-            {{ alert.message }}
+            <span class="alert-text">{{ alert.message }}</span>
+            <button class="dismiss-btn" (click)="dismissAlert($index)">✕</button>
           </div>
         } @empty {
           <div class="record-item empty-state">Няма скорошни известия</div>
@@ -20,7 +21,7 @@
     <div class="section">
       <div class="section-header">
         <h3 class="double-line">Последно <br />зареждане</h3>
-        <a [routerLink]="['/cars', car()._id, 'add-fuel']" class="btn-add-large" title="Добави"
+        <a [routerLink]="['/cars', car()._id, 'add-fuel']" class="btn-add-round" title="Добави"
           >+</a
         >
       </div>
@@ -30,9 +31,17 @@
             class="record-item clickable"
             [routerLink]="['/cars', car()._id, 'edit-fuel', fuelRec._id]"
           >
-            <span class="date">{{ fuelRec.date | date: 'd MMMM y' : '' : 'bg' }}</span>
-            <span class="info">{{ fuelRec.liters }} л</span>
-            <span class="price">{{ fuelRec.price }} €</span>
+            <div class="record-content">
+              <div class="record-top">
+                <span class="record-type">Зареждане</span>
+                <span class="record-date">{{ fuelRec.date | date: 'd MMMM' : '' : 'bg' }}</span>
+              </div>
+              <div class="record-bottom">
+                <span class="record-info">{{ fuelRec.gasStation }}</span>
+                <span class="record-liters">{{ fuelRec.liters }} л</span>
+                <span class="record-price">{{ fuelRec.price }} €</span>
+              </div>
+            </div>
           </div>
         } @empty {
           <div class="record-item empty-state">Няма регистрирани зареждания</div>
@@ -43,7 +52,7 @@
     <div class="section">
       <div class="section-header">
         <h3 class="double-line">Последен <br />сервиз</h3>
-        <a [routerLink]="['/cars', car()._id, 'add-service']" class="btn-add-large" title="Добави"
+        <a [routerLink]="['/cars', car()._id, 'add-service']" class="btn-add-round" title="Добави"
           >+</a
         >
       </div>
@@ -53,9 +62,16 @@
             class="record-item clickable"
             [routerLink]="['/cars', car()._id, 'edit-service', serviceRec._id]"
           >
-            <span class="date">{{ serviceRec.date | date: 'd MMMM y' : '' : 'bg' }}</span>
-            <span class="info">{{ serviceRec.type }}</span>
-            <span class="price">{{ serviceRec.price }} €</span>
+            <div class="record-content">
+              <div class="record-top">
+                <span class="record-type">{{ serviceRec.type }}</span>
+                <span class="record-date">{{ serviceRec.date | date: 'd MMMM' : '' : 'bg' }}</span>
+              </div>
+              <div class="record-bottom">
+                <span class="record-info">{{ serviceRec.brand }}</span>
+                <span class="record-price">{{ serviceRec.price }} €</span>
+              </div>
+            </div>
           </div>
         } @empty {
           <div class="record-item empty-state">Няма регистрирани сервизи</div>
@@ -66,7 +82,7 @@
     <div class="section">
       <div class="section-header">
         <h3 class="double-line">Последен <br />документ</h3>
-        <a [routerLink]="['/cars', car()._id, 'add-document']" class="btn-add-large" title="Добави"
+        <a [routerLink]="['/cars', car()._id, 'add-document']" class="btn-add-round" title="Добави"
           >+</a
         >
       </div>
@@ -76,9 +92,16 @@
             class="record-item clickable"
             [routerLink]="['/cars', car()._id, 'edit-document', documentRec._id]"
           >
-            <span class="date">{{ documentRec.date | date: 'd MMMM y' : '' : 'bg' }}</span>
-            <span class="info">{{ documentRec.title }}</span>
-            <span class="price">{{ documentRec.price }} €</span>
+            <div class="record-content">
+              <div class="record-top">
+                <span class="record-type">{{ documentRec.title }}</span>
+                <span class="record-date">{{ documentRec.date | date: 'd MMMM' : '' : 'bg' }}</span>
+              </div>
+              <div class="record-bottom">
+                <span class="record-info">{{ documentRec.brand }}</span>
+                <span class="record-price">{{ documentRec.price }} €</span>
+              </div>
+            </div>
           </div>
         } @empty {
           <div class="record-item empty-state">Няма регистрирани документи</div>
