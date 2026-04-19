@@ -3,7 +3,7 @@
 
   <div class="documents-grid">
     @for (documentRecord of documentRecords(); track documentRecord._id) {
-      <div class="document-card">
+      <div class="document-card" [appExpiryWarning]="documentRecord.expiryDate || ''">
         <div class="card-header">
           <h4>{{ documentRecord.type | documentType }}</h4>
           <h3>{{ documentRecord.title }}</h3>

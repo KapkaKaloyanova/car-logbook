@@ -3,7 +3,7 @@
 
   <div class="services-grid">
     @for (record of serviceRecords(); track record._id) {
-      <div class="service-card">
+      <div class="service-card" [appExpiryWarning]="record.nextServiceDate || ''">
         <div class="card-header">
           <h3>{{ record.type }}</h3>
           <span class="record-date">{{ record.date }}</span>

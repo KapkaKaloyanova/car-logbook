@@ -5,10 +5,11 @@ import { DocumentRecord } from '../../../../shared/interfaces/document-record';
 import { RouterLink } from '@angular/router';
 import { DecimalPipe } from '@angular/common';
 import { DocumentTypePipe } from '../../../../shared/pipes/document-type.pipe';
+import { ExpiryWarningDirective } from '../../../../shared/directives/expiry-warning.directive';
 
 @Component({
   selector: 'app-car-documents',
-  imports: [RouterLink, DecimalPipe, DocumentTypePipe],
+  imports: [RouterLink, DecimalPipe, DocumentTypePipe, ExpiryWarningDirective],
   templateUrl: './car-documents.component.html',
   styleUrl: './car-documents.component.css',
 })

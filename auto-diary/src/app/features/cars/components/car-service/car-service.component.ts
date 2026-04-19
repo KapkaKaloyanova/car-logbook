@@ -4,10 +4,11 @@ import { ServiceRecordService } from '../../../../core/services/service-record.s
 import { RouterLink } from '@angular/router';
 import { ServiceRecord } from '../../../../shared/interfaces/service-record';
 import { DecimalPipe } from '@angular/common';
+import { ExpiryWarningDirective } from '../../../../shared/directives/expiry-warning.directive';
 
 @Component({
   selector: 'app-car-service',
-  imports: [RouterLink , DecimalPipe],
+  imports: [RouterLink , DecimalPipe, ExpiryWarningDirective],
   templateUrl: './car-service.component.html',
   styleUrl: './car-service.component.css',
 })

@@ -235,3 +235,15 @@ nav {
   color: var(--text-dark);
   line-height: 1.6;
 }
+
+.expired {
+  color: var(--color-danger) !important;
+  border-left: 3px solid var(--color-danger) !important;
+  background-color: color-mix(in srgb, var(--color-danger), transparent 95%) !important;
+}
+
+.warning {
+  color: #fbbf24 !important;
+  border-left: 3px solid #fbbf24 !important;
+  background-color: color-mix(in srgb, #fbbf24, transparent 95%) !important;
+}

@@ -13,12 +13,14 @@ import { Alert } from '../../../../shared/interfaces/alert';
 import { Chart } from 'chart.js/auto';
 import { createFuelChart } from '../../../../shared/helpers/chart-helpers';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { BgDateDirective } from '../../../../shared/directives/bg-date.directive';
+import { ExpiryWarningDirective } from '../../../../shared/directives/expiry-warning.directive';
 
 Chart.register(ChartDataLabels);
 
 @Component({
   selector: 'app-car-dashboard',
-  imports: [RouterLink, DatePipe],
+  imports: [RouterLink, DatePipe, BgDateDirective, ExpiryWarningDirective],
   templateUrl: './car-dashboard.component.html',
   styleUrl: './car-dashboard.component.css',
 })
@@ -35,11 +37,11 @@ export class CarDashboardComponent implements OnInit {
   car = input.required<Car>();
 
   fuelRecords = signal<FuelRecord[]>([]);
-  recentFuelRecords = computed(() => this.fuelRecords().slice(-3));
+  recentFuelRecords = computed(() => this.fuelRecords().slice(-5));
   serviceRecords = signal<ServiceRecord[]>([]);
-  recentServiceRecords = computed(() => this.serviceRecords().slice(-3));
+  recentServiceRecords = computed(() => this.serviceRecords().slice(-5));
   documentRecords = signal<DocumentRecord[]>([]);
-  recentDocumentRecords = computed(() => this.documentRecords().slice(-3));
+  recentDocumentRecords = computed(() => this.documentRecords().slice(-5));
 
   sortedFuelRecords = computed(() =>
     [...this.fuelRecords()].sort((a, b) => a.mileage - b.mileage)

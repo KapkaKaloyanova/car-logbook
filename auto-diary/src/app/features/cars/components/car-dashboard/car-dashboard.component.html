@@ -46,8 +46,8 @@
           >
             <div class="record-content">
               <div class="record-top">
-                <span class="record-type">Зареждане</span>
-                <span class="record-date">{{ fuelRec.date | date: 'd MMMM' : '' : 'bg' }}</span>
+                <span class="record-type"><i class="fas fa-tint"></i></span>
+                <span [appBgDate]="fuelRec.date" [showYear]="false" class="record-date">{{ fuelRec.date }}</span>
               </div>
               <div class="record-bottom">
                 <span class="record-info">{{ fuelRec.gasStation }}</span>
@@ -74,11 +74,12 @@
           <div
             class="record-item clickable"
             [routerLink]="['/cars', car()._id, 'edit-service', serviceRec._id]"
+            [appExpiryWarning]="serviceRec.nextServiceDate || ''"
           >
             <div class="record-content">
               <div class="record-top">
                 <span class="record-type">{{ serviceRec.type }}</span>
-                <span class="record-date">{{ serviceRec.date | date: 'd MMMM' : '' : 'bg' }}</span>
+                <span [appBgDate]="serviceRec.date" [showYear]="false" class="record-date">{{ serviceRec.date }}</span>
               </div>
               <div class="record-bottom">
                 <span class="record-info">{{ serviceRec.brand }}</span>
@@ -104,6 +105,7 @@
           <div
             class="record-item clickable"
             [routerLink]="['/cars', car()._id, 'edit-document', documentRec._id]"
+            [appExpiryWarning]="documentRec.expiryDate || ''"
           >
             <div class="record-content">
               <div class="record-top">
