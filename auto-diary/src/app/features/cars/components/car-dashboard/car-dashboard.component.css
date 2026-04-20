@@ -11,7 +11,6 @@
   display: flex;
   flex-direction: column;
   gap: 25px;
-  padding: 20px 0;
 }
 
 /* Известията (Alerts) - заемат целия горен ред */
@@ -24,7 +23,6 @@
   border-radius: 16px;
   padding: 25px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  margin-bottom: 10px; /* Малко разстояние преди грида */
 }
 
 /* Общ стил за grid-container, който да държи трите карти на един ред */
@@ -90,8 +88,8 @@
 
 /* --- КРЪГЪЛ БУТОН + --- */
 .btn-add-round {
-  width: 45px;
-  height: 45px;
+  width: 42px;
+  height: 42px;
   background: var(--primary);
   color: white;
   border-radius: 50%; /* Напълно кръгъл */
@@ -99,10 +97,10 @@
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  font-size: 28px;
-  font-weight: bold;
+  font-size: 16px;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.3);
+  box-shadow: 0 4px 15px rgba(var(--primary-rgb), 0.3);
+  line-height: 1;
 }
 
 .btn-add-round:hover {
@@ -248,6 +246,39 @@
 /* Мобилен изглед - една колона на малък екран */
 @media (max-width: 950px) {
   .sections {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Мобилна версия */
+@media (max-width: 1100px) {
+  .records-detail {
+    overflow-x: auto;
+  }
+  table {
+    min-width: 900px;
+  }
+}
+
+@media (max-width: 600px) {
+  th,
+  td {
+    padding: 10px 8px;
+    font-size: 12px;
+  }
+
+  .records-detail > .btn-primary {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 900px) {
+  .top-row {
+    grid-template-columns: 1fr;
+  }
+
+  .grid-container {
     grid-template-columns: 1fr;
   }
 }

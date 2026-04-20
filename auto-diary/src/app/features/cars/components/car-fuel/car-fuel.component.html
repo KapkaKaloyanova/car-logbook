@@ -4,12 +4,12 @@
     <thead>
       <tr>
         <th>Дата</th>
-        <th>Километраж</th>
+        <th><abbr title="Километраж">Км</abbr></th>
         <th>Литри</th>
-        <th>Среден разход <span class="small">изчислен</span> </th>
+        <th><abbr title="Среден разход (изчислен от километраж)">л/100км</abbr></th>
         <th>Цена/литър</th>
         <th>Цена</th>
-        <th>Бензиностанция</th>
+        <th><abbr title="Бензиностанция">Бензин.</abbr></th>
         <th>Коментар</th>
         <th>Тип на пътя</th>
         <th class="actions-header">Действия</th>
@@ -18,10 +18,17 @@
     <tbody>
       @for (rec of fuelRecords(); track rec._id; let i = $index) {
         <tr>
-          <td>{{ rec.date }}</td>
+          <td [appBgDate]="rec.date">{{ rec.date }}</td>
           <td>{{ rec.mileage | number }} km</td>
-          <td>{{ rec.liters | number }} </td>
-          <td>{{ i===0 ? '---' : (rec.liters / (rec.mileage - fuelRecords()[i-1].mileage))*100 | number: '1.2-2'}}</td>
+          <td>{{ rec.liters | number }}</td>
+          <td>
+            {{
+              i === 0
+                ? '---'
+                : ((rec.liters / (rec.mileage - fuelRecords()[i - 1].mileage)) * 100
+                  | number: '1.2-2')
+            }}
+          </td>
           <td>{{ rec.unitPrice | number: '1.2-2' }} €/л</td>
           <td>{{ rec.price | number: '1.2-2' }} €</td>
           <td>{{ rec.gasStation || '---' }}</td>
@@ -29,9 +36,13 @@
           <td>{{ rec.roadType }}</td>
           <td class="actions-cell">
             <div class="actions-wrapper">
-              <a class="action-link edit" [routerLink]="['/cars', car()._id, 'edit-fuel', rec._id]">Редактирай</a>
+              <a class="action-link edit" [routerLink]="['/cars', car()._id, 'edit-fuel', rec._id]"
+                ><i class="fas fa-pen"></i
+              ></a>
               <span class="divider"> | </span>
-              <a (click)="onDelete(rec._id)" class="action-link delete">Изтрии</a>
+              <a (click)="onDelete(rec._id)" class="action-link delete"
+                ><i class="fas fa-trash"></i
+              ></a>
             </div>
           </td>
         </tr>
@@ -50,4 +61,3 @@
     </tbody>
   </table>
 </div>
- 

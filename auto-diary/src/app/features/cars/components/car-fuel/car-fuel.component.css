@@ -2,29 +2,15 @@
   animation: fadeIn 0.3s ease-in-out;
 }
 
-/* Контейнер за бутона над таблицата */
-.records-detail > .btn-primary {
-  display: inline-block;
-  margin-bottom: 20px;
-  padding: 10px 20px;
-  text-decoration: none;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 600;
-  background-color: var(--primary);
-  color: white;
-  transition: all 0.2s;
-}
-
 /* Основен стил на таблицата */
 table {
   width: 100%;
-  border-collapse: separate; 
+  border-collapse: separate;
   border-spacing: 0;
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid var(--border-card);
   border-radius: 12px;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
 /* Заглавен ред */
@@ -50,6 +36,11 @@ td {
   border-bottom: 1px solid rgba(255, 255, 255, 0.03);
 }
 
+td,
+th {
+  white-space: nowrap;
+}
+
 /* ФИКС ЗА ДЕЙСТВИЯТА (Редактирай / Изтрий) */
 .actions-wrapper {
   display: flex;
@@ -67,12 +58,14 @@ td {
 }
 
 /* Редактирай - светло синьо за четливост */
-.action-link.edit, .action-link.edit:visited {
+.action-link.edit,
+.action-link.edit:visited {
   color: #ffffff !important;
 }
 
 /* Изтрий - червено */
-.action-link.delete, .action-link.delete:visited {
+.action-link.delete,
+.action-link.delete:visited {
   color: #f87171 !important;
 }
 
@@ -137,6 +130,7 @@ tbody tr:last-child td {
   border-bottom: none;
 }
 
+/* Мобилна версия */
 @media (max-width: 1100px) {
   .records-detail {
     overflow-x: auto;
@@ -146,7 +140,84 @@ tbody tr:last-child td {
   }
 }
 
+@media (max-width: 600px) {
+  th,
+  td {
+    padding: 10px 8px;
+    font-size: 12px;
+  }
+
+  .records-detail > .btn-primary {
+    width: 100%;
+    text-align: center;
+  }
+}
+/* скриваме колони бензиностанция, коментар и тип на пътя за мобилната версия*/
+@media (max-width: 768px) {
+  table {
+    min-width: unset; /* Маха min-width напълно */
+    width: 100%;
+  }
+
+  table th:nth-child(7),
+  table td:nth-child(7),
+  table th:nth-child(8),
+  table td:nth-child(8),
+  table th:nth-child(9),
+  table td:nth-child(9) {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  table th {
+    font-size: 0; /* Скрива оригиналния текст */
+    padding: 8px 4px;
+  }
+
+  table th .small {
+    display: none;
+  }
+
+  table th::before {
+    font-size: 10px; /* Показва новия текст */
+  }
+
+  table th:nth-child(1)::before {
+    content: 'Дата';
+  }
+  table th:nth-child(2)::before {
+    content: 'Км';
+  }
+  table th:nth-child(3)::before {
+    content: 'Л';
+  }
+  table th:nth-child(4)::before {
+    content: 'л/100км';
+  }
+  table th:nth-child(5)::before {
+    content: '€/л';
+  }
+  table th:nth-child(6)::before {
+    content: '€';
+  }
+  table th:nth-child(10)::before {
+    content: '';
+  } /* Действия */
+
+  table td {
+    font-size: 11px;
+    padding: 8px 4px;
+  }
+}
+
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(5px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

@@ -180,6 +180,7 @@
 }
 
 /* Responsive за мобилни устройства */
+
 @media (max-width: 900px) {
   .car-details-container {
     grid-template-columns: 1fr; /* Една колона на малки екрани */
@@ -187,5 +188,28 @@
 
   .car-sidebar {
     position: static; /* Премахва лепкавия ефект */
+  }
+
+  .car-image {
+    height: 120px; /* По-малка снимка */
+    width: 120px;
+    border-radius: 50%; /* Кръгла */
+    float: left;
+    margin-right: 15px;
+    margin-bottom: 0;
+  }
+
+  .car-info-card h3 {
+    font-size: 16px;
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Две колони */
+    gap: 6px;
+  }
+
+  .car-actions {
+    clear: both; /* След float-натата снимка */
   }
 }

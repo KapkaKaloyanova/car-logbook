@@ -37,10 +37,10 @@
           <a
             class="action-link edit"
             [routerLink]="['/cars', car()._id, 'edit-service', record._id]"
-            >Редактирай</a
+            ><i class="fas fa-pen"></i></a
           >
           <span class="divider"> | </span>
-          <a (click)="onDelete(record._id)" class="action-link delete">Изтрии</a>
+          <a (click)="onDelete(record._id)" class="action-link delete"><i class="fas fa-trash"></i></a>
         </div>
       </div>
     } @empty {

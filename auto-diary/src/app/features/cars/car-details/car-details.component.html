@@ -26,9 +26,9 @@
       </div>
       @if (isOwner()) {
         <div class="car-actions">
-          <a [routerLink]="['/cars', currentCar()?._id, 'edit']" class="btn-edit">Редактирай</a>
+          <a [routerLink]="['/cars', currentCar()?._id, 'edit']" class="btn-edit"><i class="fas fa-pen"></i></a>
           <a (click)="onDelete(currentCar()!._id)" class="btn-delete" [class.disabled]="isLoading()"
-            >Изтрий</a
+            ><i class="fas fa-trash"></i></a
           >
         </div>
       }

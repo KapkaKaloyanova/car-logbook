@@ -4,10 +4,11 @@ import { FuelService } from '../../../../core/services/fuel.service';
 import { FuelRecord } from '../../../../shared/interfaces/fuel-record';
 import { RouterLink } from '@angular/router';
 import { DecimalPipe } from '@angular/common';
+import { BgDateDirective } from '../../../../shared/directives/bg-date.directive';
 
 @Component({
   selector: 'app-car-fuel',
-  imports: [RouterLink, DecimalPipe],
+  imports: [RouterLink, DecimalPipe, BgDateDirective],
   templateUrl: './car-fuel.component.html',
   styleUrl: './car-fuel.component.css',
 })

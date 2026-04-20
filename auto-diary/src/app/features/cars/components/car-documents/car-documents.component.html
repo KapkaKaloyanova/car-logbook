@@ -32,10 +32,10 @@
           <a
             [routerLink]="['/cars', car()._id, 'edit-document', documentRecord._id]"
             class="action-link edit"
-            >Редактирай</a
+            ><i class="fas fa-pen"></i></a
           >
           <span class="divider">|</span>
-          <a (click)="onDelete(documentRecord._id)" class="action-link delete">Изтрий</a>
+          <a (click)="onDelete(documentRecord._id)" class="action-link delete"><i class="fas fa-trash"></i></a>
         </div>
       </div>
     } @empty {

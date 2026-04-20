@@ -3,26 +3,13 @@
   animation: fadeIn 0.3s ease-in-out;
 }
 
-/* Контейнер за бутона над таблицата */
-.records-detail > .btn-primary {
-  display: inline-block;
-  margin-bottom: 20px;
-  padding: 10px 20px;
-  text-decoration: none;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 600;
-  background-color: var(--primary);
-  color: white;
-  transition: all 0.2s;
-}
+
 
 /* Контейнер за картите */
 .services-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 25px;
-  margin-top: 20px;
   animation: fadeIn 0.3s ease-in-out;
 }
 
@@ -166,4 +153,27 @@
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(5px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+/* Мобилна версия */
+@media (max-width: 1100px) {
+  .records-detail {
+    overflow-x: auto;
+  }
+  table {
+    min-width: 900px;
+  }
+  
+}
+
+@media (max-width: 600px) {
+  th, td {
+    padding: 10px 8px;
+    font-size: 12px;
+  }
+  
+  .records-detail > .btn-primary {
+    width: 100%;
+    text-align: center;
+  }
 }
