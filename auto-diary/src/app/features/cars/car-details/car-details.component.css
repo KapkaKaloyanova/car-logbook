@@ -105,13 +105,13 @@
 }
 
 .btn-edit:hover {
-  filter: brightness(1.1);
+  filter: brightness(1.5);
   transform: translateY(-2px);
 }
 
 /* Стил за Изтрий (Вторичен/Опасен) */
 .btn-delete {
-  background-color: transparent;
+  background-color: var(--bg-card);
   color: #ef4444;
   border: 1px solid #ef4444;
 }

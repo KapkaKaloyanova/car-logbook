@@ -7,7 +7,7 @@
         <th><abbr title="Километраж">Км</abbr></th>
         <th>Литри</th>
         <th><abbr title="Среден разход (изчислен от километраж)">л/100км</abbr></th>
-        <th>Цена/литър</th>
+        <th>Цена/л</th>
         <th>Цена</th>
         <th><abbr title="Бензиностанция">Бензин.</abbr></th>
         <th>Коментар</th>
@@ -20,14 +20,14 @@
         <tr>
           <td [appBgDate]="rec.date">{{ rec.date }}</td>
           <td>{{ rec.mileage | number }} km</td>
-          <td>{{ rec.liters | number }}</td>
+          <td>{{ rec.liters | number }} л</td>
           <td>
             {{
               i === 0
                 ? '---'
                 : ((rec.liters / (rec.mileage - fuelRecords()[i - 1].mileage)) * 100
                   | number: '1.2-2')
-            }}
+            }} 
           </td>
           <td>{{ rec.unitPrice | number: '1.2-2' }} €/л</td>
           <td>{{ rec.price | number: '1.2-2' }} €</td>
