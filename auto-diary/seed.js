@@ -1,4 +1,5 @@
-const BASE_URL = 'http://localhost:3030';
+require('dotenv').config();
+const BASE_URL = process.env.API_URL || 'http://localhost:3030';
 
 const adminCredentials = { email: 'admin@abv.bg', password: 'admin' };
 const kapkaCredentials = { email: 'kapchoni@gmail.com', password: '1234' };
